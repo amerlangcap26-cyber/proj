@@ -1,0 +1,901 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarangayHub | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+<!-- BARANGAYHUB LOGIN PAGE -->
+<div class="page-container" id="authContainer">
+    <section class="login-card login-card-single" id="loginPage">
+        <!-- BRAND -->
+        <div class="login-brand">
+            <div class="login-brand-mark">B</div>
+            <h1>Barangay<span>Hub</span></h1>
+            <p>COMMUNITY RECORDS PORTAL</p>
+        </div>
+        <!-- LOGIN PANEL -->
+        <div class="form-panel">
+            <div id="loginPanel">
+                <div class="form-header">
+                    <p class="eyebrow">BARANGAY OFFICE PORTAL</p>
+                    <h2>Staff Access</h2>
+                    <p>Access your barangay records and documents.</p>
+                </div>
+                <!-- EMAIL AND PASSWORD LOGIN -->
+                <form id="emailLoginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email address" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="password-box">
+                            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" required>
+                            <button type="button" id="loginPasswordToggle">Show</button>
+                        </div>
+                    </div>
+                    <div class="forgot-row">
+                        <button type="button" id="forgotPasswordButton" class="forgot-button">Reset password</button>
+                    </div>
+                    <button type="submit" class="login-button">Sign In</button>
+                    <p id="emailLoginMessage" class="auth-status" aria-live="polite"></p>
+                </form>
+                <!-- DIVIDER -->
+                <div class="auth-divider">
+                    <span>OR</span>
+                </div>
+                <!-- GOOGLE SIGN IN -->
+                <button type="button" class="google-signin-button" id="googleSignInButton">
+                    <span class="google-mark">G</span>
+                    Continue with Google
+                </button>
+                <p id="authMessage" class="auth-status" aria-live="polite"></p>
+                <!-- REGISTRATION LINK -->
+                <div class="register-prompt">
+                    <p>New barangay staff member?</p>
+                    <button type="button" id="showRegisterButton" class="text-button">
+                        Request Registration
+                    </button>
+                </div>
+                <div class="access-note">
+                    Authorized barangay staff members only.
+                </div>
+                <!-- TEMPORARY FRONT-END TESTING -->
+                <button type="button" id="developerPreviewButton" class="preview-button">
+                    Preview Dashboard (Development Only)
+                </button>
+            </div>
+            <!-- REGISTRATION PANEL -->
+            <div id="registrationPanel" hidden>
+                <div class="form-header">
+                    <p class="eyebrow">BARANGAY OFFICE PORTAL</p>
+                    <h2>Staff Registration</h2>
+                    <p>Request access to the BarangayHub system.</p>
+                </div>
+                <form id="registrationForm" class="registration-form">
+                    <div class="form-group">
+                        <label for="registerFullName">Full Name</label>
+                        <input type="text" id="registerFullName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Google Account Email</label>
+                        <input type="email" id="registerEmail" placeholder="Enter your Gmail address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPosition">Position</label>
+                        <select id="registerPosition" required>
+                            <option value="">Select your position</option>
+                            <option value="Punong Barangay">Punong Barangay</option>
+                            <option value="Barangay Kagawad">Barangay Kagawad</option>
+                            <option value="Barangay Secretary">Barangay Secretary</option>
+                            <option value="Barangay Treasurer">Barangay Treasurer</option>
+                            <option value="Barangay Staff">Barangay Staff</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerInvitationCode">Invitation Code</label>
+                        <input type="text" id="registerInvitationCode" placeholder="Enter your invitation code" required>
+                    </div>
+                    <button type="submit" class="login-button">Submit Registration</button>
+                    <p id="registrationMessage" class="auth-status" aria-live="polite"></p>
+                </form>
+                <div class="register-prompt">
+                    <p>Already have an account?</p>
+                    <button type="button" id="backToLoginButton" class="text-button">
+                        Back to Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        BarangayHub © 2026 | Barangay Office System
+    </footer>
+</div>
+
+<!-- MAIN DASHBOARD -->
+<div class="dashboard-shell" id="dashboardPage" hidden>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="mini-logo">B</div>
+            <div>
+                <h2>Barangay<span>Hub</span></h2>
+                <p>Records Management</p>
+            </div>
+        </div>
+        <p class="menu-label">MAIN MENU</p>
+        <nav class="sidebar-nav">
+            <button class="nav-link active"
+                data-page="overview"
+                data-title="Dashboard Overview"
+                data-description="Welcome to your barangay information dashboard.">
+                <span class="nav-icon">▦</span>
+                Dashboard
+            </button>
+            <button class="nav-link"
+                data-page="members"
+                data-title="Barangay Members"
+                data-description="View barangay officials and staff information.">
+                <span class="nav-icon">♙</span>
+                Barangay Members
+            </button>
+            <button class="nav-link"
+                data-page="residents"
+                data-title="Residents Information"
+                data-description="Find and view registered resident information.">
+                <span class="nav-icon">♧</span>
+                Residents Information
+            </button>
+            <button class="nav-link"
+                data-page="documents"
+                data-title="Document Finder"
+                data-description="Search and view available resident documents.">
+                <span class="nav-icon">▤</span>
+                Document Finder
+            </button>
+            <button class="nav-link"
+                data-page="guide"
+                data-title="Document Guide"
+                data-description="View barangay document types and requirements.">
+                <span class="nav-icon">▧</span>
+                Document Guide
+            </button>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="staff-profile">
+                <div class="staff-avatar">A</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Barangay Staff</small>
+                </div>
+            </div>
+            <button class="logout-button" id="logoutButton">
+                ⇥ Log Out
+            </button>
+        </div>
+    </aside>
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+        <!-- TOP HEADER -->
+        <header class="topbar">
+            <div>
+                <p class="topbar-label">BARANGAY OFFICE</p>
+                <h1 id="pageTitle">Dashboard Overview</h1>
+                <p id="pageDescription">Welcome to your barangay information dashboard.</p>
+            </div>
+            <div class="topbar-user">
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Authorized Staff</small>
+                </div>
+                <div class="admin-avatar">A</div>
+            </div>
+        </header>
+        <div class="dashboard-content">
+            <!-- PAGE 1: OVERVIEW -->
+            <section class="dashboard-view" id="overviewPage">
+                <div class="welcome-banner">
+                    <div>
+                        <span class="welcome-tag">BARANGAY PORTAL</span>
+                        <h2>Welcome to BarangayHub!</h2>
+                        <p>
+                            Manage barangay members, find resident
+                            records, and access documents easily.
+                        </p>
+                    </div>
+                    <div class="banner-decoration">B</div>
+                </div>
+                <!-- SUMMARY CARDS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-heading">
+                            <span>Total Barangay Members</span>
+                            <span class="stat-icon violet">BM</span>
+                        </div>
+                        <h2 id="totalMembers">0</h2>
+                        <p>Officials and staff</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-heading">
+                            <span>Total Residents</span>
+                            <span class="stat-icon blue">RS</span>
+                        </div>
+                        <h2 id="totalResidents">0</h2>
+                        <p>Registered residents</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-heading">
+                            <span>Available Documents</span>
+                            <span class="stat-icon pink">DC</span>
+                        </div>
+                        <h2 id="totalDocuments">0</h2>
+                        <p>Stored documents</p>
+                    </div>
+                </div>
+                <!-- QUICK ACCESS -->
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Quick Access</h3>
+                            <p>Choose what you want to access.</p>
+                        </div>
+                    </div>
+                    <div class="quick-grid">
+                        <button class="quick-card" data-go-page="members">
+                            <span class="quick-icon violet-bg">♙</span>
+                            <strong>Barangay Members</strong>
+                            <small>View officials and staff</small>
+                        </button>
+                        <button class="quick-card" data-go-page="residents">
+                            <span class="quick-icon blue-bg">♧</span>
+                            <strong>Residents Information</strong>
+                            <small>Find resident details</small>
+                        </button>
+                        <button class="quick-card" data-go-page="documents">
+                            <span class="quick-icon pink-bg">▤</span>
+                            <strong>Document Finder</strong>
+                            <small>Find resident documents</small>
+                        </button>
+                        <button class="quick-card" data-go-page="guide">
+                            <span class="quick-icon violet-bg">▧</span>
+                            <strong>Document Guide</strong>
+                            <small>View document requirements</small>
+                        </button>
+                    </div>
+                </div>
+                <div class="information-panel">
+                    <h3>System Purpose</h3>
+                    <p>
+                        BarangayHub helps authorized barangay staff
+                        organize member and resident information.
+                        It makes searching for resident records and
+                        available documents easier and faster.
+                    </p>
+                </div>
+            </section>
+
+            
+<!-- PAGE 2: BARANGAY MEMBERS -->
+<section class="dashboard-view" id="membersPage" hidden>
+
+    <!-- HEADER -->
+    <div class="directory-header">
+        <div>
+            <h2>Barangay Officials & Staff</h2>
+            <p>Manage and view barangay member information.</p>
+        </div>
+
+        <div class="resident-toolbar">
+            <div class="member-search-box">
+                <input
+                    type="search"
+                    id="memberSearch"
+                    placeholder="Search name, ID, or position..."
+                >
+            </div>
+
+            <button
+                type="button"
+                class="primary-action-button"
+                id="addMemberButton">
+                + Add Member
+            </button>
+        </div>
+    </div>
+
+
+    <!-- MEMBERS TABLE -->
+    <div class="panel members-panel">
+
+        <div class="panel-heading">
+            <div>
+                <h3>Members Directory</h3>
+                <p>List of barangay officials and staff.</p>
+            </div>
+
+            <span id="memberResultCount">0 members</span>
+        </div>
+
+        <div class="table-container">
+            <table class="directory-table">
+
+                <thead>
+                    <tr>
+                        <th>Member ID</th>
+                        <th>Full Name</th>
+                        <th>Position</th>
+                        <th>Contact Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="memberTableBody"></tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+
+    <!-- MEMBER DETAILS -->
+    <div class="member-detail-panel" id="memberDetailPanel" hidden>
+
+        <div class="member-detail-heading">
+
+            <div>
+                <span class="detail-label">MEMBER DETAILS</span>
+                <h3 id="memberDetailName">Member Name</h3>
+                <p id="memberDetailPosition">Position</p>
+            </div>
+
+            <div class="resident-detail-actions">
+
+                <button
+                    type="button"
+                    class="primary-action-button"
+                    id="editMemberButton">
+                    Edit
+                </button>
+
+                <button
+                    type="button"
+                    class="delete-action-button"
+                    id="deleteMemberButton">
+                    Delete
+                </button>
+
+                <button
+                    type="button"
+                    id="closeMemberDetails">
+                    Close
+                </button>
+
+            </div>
+        </div>
+
+
+        <div class="member-detail-grid">
+
+            <div class="detail-item">
+                <span>Member ID</span>
+                <strong id="memberDetailId"></strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Position</span>
+                <strong id="memberDetailRole"></strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Contact Number</span>
+                <strong id="memberDetailContact"></strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Email Address</span>
+                <strong id="memberDetailEmail"></strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Assigned Office</span>
+                <strong id="memberDetailOffice"></strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADD / EDIT MEMBER MODAL -->
+    <div class="resident-modal" id="memberModal" hidden>
+
+        <div
+            class="resident-modal-backdrop"
+            id="memberModalBackdrop">
+        </div>
+
+
+        <div
+            class="resident-modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="memberModalTitle">
+
+            <div class="resident-modal-header">
+
+                <div>
+                    <span class="detail-label">
+                        BARANGAY MEMBER MANAGEMENT
+                    </span>
+
+                    <h3 id="memberModalTitle">
+                        Add New Member
+                    </h3>
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close-button"
+                    id="closeMemberModal">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="memberForm">
+
+                <input
+                    type="hidden"
+                    id="memberEditId"
+                >
+
+                <div class="resident-form-grid">
+
+                    <div class="form-group full-width">
+                        <label for="memberNameInput">Full Name</label>
+
+                        <input
+                            type="text"
+                            id="memberNameInput"
+                            placeholder="Enter full name"
+                            required>
+                    </div>
+
+
+                    <div class="form-group full-width">
+                        <label for="memberPositionInput">Position</label>
+
+                        <select id="memberPositionInput" required>
+
+                            <option value="">Select position</option>
+
+                            <option value="Punong Barangay">
+                                Punong Barangay
+                            </option>
+
+                            <option value="Barangay Kagawad">
+                                Barangay Kagawad
+                            </option>
+
+                            <option value="Barangay Secretary">
+                                Barangay Secretary
+                            </option>
+
+                            <option value="Barangay Treasurer">
+                                Barangay Treasurer
+                            </option>
+
+                            <option value="Barangay Health Worker">
+                                Barangay Health Worker
+                            </option>
+
+                            <option value="Barangay Staff">
+                                Barangay Staff
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="memberContactInput">Contact Number</label>
+
+                        <input
+                            type="tel"
+                            id="memberContactInput"
+                            placeholder="Optional">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="memberEmailInput">Email Address</label>
+
+                        <input
+                            type="email"
+                            id="memberEmailInput"
+                            placeholder="Optional">
+                    </div>
+
+
+                    <div class="form-group full-width">
+                        <label for="memberOfficeInput">Assigned Office</label>
+
+                        <input
+                            type="text"
+                            id="memberOfficeInput"
+                            placeholder="Enter assigned office"
+                            required>
+                    </div>
+
+                </div>
+
+
+                <p
+                    id="memberFormMessage"
+                    class="auth-status"
+                    aria-live="polite">
+                </p>
+
+
+                <div class="resident-form-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-action-button"
+                        id="cancelMemberForm">
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-action-button"
+                        id="saveMemberButton">
+                        Save Member
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+            <!-- PAGE 3: RESIDENTS INFORMATION -->
+            <section class="dashboard-view" id="residentsPage" hidden>
+                <!-- HEADER -->
+                <div class="directory-header">
+                    <div>
+                        <h2>Residents Directory</h2>
+                        <p>Manage and view registered resident information.</p>
+                    </div>
+                    <div class="resident-toolbar">
+                        <div class="member-search-box">
+                            <input type="search" id="residentSearch"
+                                placeholder="Search resident name, ID, or address...">
+                        </div>
+                        <button type="button"
+                            class="primary-action-button"
+                            id="addResidentButton">
+                            + Add Resident
+                        </button>
+                    </div>
+                </div>
+                <!-- RESIDENTS TABLE -->
+                <div class="panel members-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Registered Residents</h3>
+                            <p>Manage resident records.</p>
+                        </div>
+                        <span id="residentResultCount">0 residents</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="directory-table">
+                            <thead>
+                                <tr>
+                                    <th>Resident ID</th>
+                                    <th>Full Name</th>
+                                    <th>Birthday</th>
+                                    <th>Age</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="residentTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- RESIDENT DETAILS -->
+                <div class="member-detail-panel" id="residentDetailPanel" hidden>
+                    <div class="member-detail-heading">
+                        <div>
+                            <span class="detail-label">RESIDENT DETAILS</span>
+                            <h3 id="residentDetailName">Resident Name</h3>
+                            <p>Complete resident information</p>
+                        </div>
+                        <div class="resident-detail-actions">
+                            <button type="button"
+                                class="primary-action-button"
+                                id="editResidentButton">
+                                Edit
+                            </button>
+                            <button type="button"
+                                class="delete-action-button"
+                                id="deleteResidentButton">
+                                Delete
+                            </button>
+                            <button type="button" id="closeResidentDetails">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                    <div class="member-detail-grid">
+                        <div class="detail-item">
+                            <span>Resident ID</span>
+                            <strong id="residentDetailId"></strong>
+                        </div>
+                        <div class="detail-item">
+                            <span>Gender</span>
+                            <strong id="residentDetailGender"></strong>
+                        </div>
+                        <div class="detail-item">
+                            <span>Date of Birth</span>
+                            <strong id="residentDetailBirthday"></strong>
+                        </div>
+                        <div class="detail-item">
+                            <span>Age</span>
+                            <strong id="residentDetailAge"></strong>
+                        </div>
+                        <div class="detail-item resident-address">
+                            <span>Complete Address</span>
+                            <strong id="residentDetailAddress"></strong>
+                        </div>
+                    </div>
+                </div>
+                <!-- ADD / EDIT RESIDENT MODAL -->
+                <div class="resident-modal" id="residentModal" hidden>
+                    <div class="resident-modal-backdrop"
+                        id="residentModalBackdrop"></div>
+                    <div class="resident-modal-card"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="residentModalTitle">
+                        <div class="resident-modal-header">
+                            <div>
+                                <span class="detail-label">RESIDENT MANAGEMENT</span>
+                                <h3 id="residentModalTitle">Add New Resident</h3>
+                            </div>
+                            <button type="button"
+                                class="modal-close-button"
+                                id="closeResidentModal">×</button>
+                        </div>
+                        <form id="residentForm">
+                            <input type="hidden" id="residentEditId">
+                            <div class="resident-form-grid">
+                                <div class="form-group full-width">
+                                    <label for="residentNameInput">Full Name</label>
+                                    <input type="text" id="residentNameInput"
+                                        placeholder="Enter full name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="residentBirthDateInput">Date of Birth</label>
+                                    <input type="date" id="residentBirthDateInput" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="residentGenderInput">Gender</label>
+                                    <select id="residentGenderInput" required>
+                                        <option value="">Select gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                        <option value="Prefer not to say">Prefer not to say</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="residentPurokInput">Purok</label>
+                                    <input type="text" id="residentPurokInput"
+                                        placeholder="Example: Purok 1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="residentStreetInput">Street</label>
+                                    <input type="text" id="residentStreetInput"
+                                        placeholder="Enter street" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="residentBarangayInput">Barangay</label>
+                                    <input type="text" id="residentBarangayInput"
+                                        placeholder="Enter barangay" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="residentCityInput">City / Municipality</label>
+                                    <input type="text" id="residentCityInput"
+                                        placeholder="Enter city or municipality" required>
+                                </div>
+                            </div>
+                            <p id="residentFormMessage" class="auth-status"
+                                aria-live="polite"></p>
+                            <div class="resident-form-actions">
+                                <button type="button"
+                                    class="secondary-action-button"
+                                    id="cancelResidentForm">
+                                    Cancel
+                                </button>
+                                <button type="submit"
+                                    class="primary-action-button"
+                                    id="saveResidentButton">
+                                    Save Resident
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 4: DOCUMENT FINDER -->
+            <section class="dashboard-view" id="documentsPage" hidden>
+                <!-- DOCUMENT SEARCH HEADER -->
+                <div class="directory-header">
+                    <div>
+                        <h2>Find Resident Documents</h2>
+                        <p>Search for a resident and locate their available documents.</p>
+                    </div>
+                    <div class="member-search-box">
+                        <input type="search" id="documentSearch"
+                            placeholder="Search resident name or ID...">
+                    </div>
+                </div>
+                <!-- RESIDENT SEARCH RESULTS -->
+                <div class="panel members-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Resident Search Results</h3>
+                            <p>Select a resident to view their documents.</p>
+                        </div>
+                        <span id="documentResidentCount">0 residents</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="directory-table">
+                            <thead>
+                                <tr>
+                                    <th>Resident ID</th>
+                                    <th>Full Name</th>
+                                    <th>Address</th>
+                                    <th>Documents</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="documentResidentTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- SELECTED RESIDENT DOCUMENTS -->
+                <div class="member-detail-panel" id="residentDocumentPanel" hidden>
+                    <div class="member-detail-heading">
+                        <div>
+                            <span class="detail-label">RESIDENT DOCUMENT RECORDS</span>
+                            <h3 id="documentResidentName">Resident Name</h3>
+                            <p id="documentResidentInfo">Resident information</p>
+                        </div>
+                        <button type="button" id="closeResidentDocuments">Close</button>
+                    </div>
+                    <!-- DOCUMENTS TABLE -->
+                    <div class="table-container">
+                        <table class="directory-table">
+                            <thead>
+                                <tr>
+                                    <th>Document ID</th>
+                                    <th>Document Type</th>
+                                    <th>Date Issued</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="residentDocumentsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- DOCUMENT DETAILS -->
+                <div class="member-detail-panel" id="documentDetailPanel" hidden>
+                    <div class="member-detail-heading">
+                        <div>
+                            <span class="detail-label">DOCUMENT DETAILS</span>
+                            <h3 id="selectedDocumentName">Document Name</h3>
+                            <p id="selectedDocumentResident">Resident Name</p>
+                        </div>
+                        <button type="button" id="closeDocumentDetails">Close</button>
+                    </div>
+                    <div class="member-detail-grid">
+                        <div class="detail-item">
+                            <span>Document ID</span>
+                            <strong id="selectedDocumentId"></strong>
+                        </div>
+                        <div class="detail-item">
+                            <span>Document Type</span>
+                            <strong id="selectedDocumentType"></strong>
+                        </div>
+                        <div class="detail-item">
+                            <span>Date Issued</span>
+                            <strong id="selectedDocumentDate"></strong>
+                        </div>
+                        <div class="detail-item">
+                            <span>Status</span>
+                            <strong id="selectedDocumentStatus"></strong>
+                        </div>
+                        <div class="detail-item document-description">
+                            <span>Purpose / Notes</span>
+                            <strong id="selectedDocumentNotes"></strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 5: DOCUMENT GUIDE -->
+            <section class="dashboard-view" id="guidePage" hidden>
+                <!-- PAGE HEADER -->
+                <div class="directory-header">
+                    <div>
+                        <h2>Barangay Document Guide</h2>
+                        <p>Find document purposes, typical requirements, and instructions.</p>
+                    </div>
+                    <div class="member-search-box">
+                        <input type="search" id="guideSearch"
+                            placeholder="Search document type or purpose...">
+                    </div>
+                </div>
+                <!-- GUIDE INFORMATION -->
+                <div class="guide-notice">
+                    <div class="guide-notice-icon">i</div>
+                    <div>
+                        <strong>Document Information</strong>
+                        <p>
+                            This guide provides sample information about common
+                            barangay documents. Always confirm the official
+                            requirements with your barangay office.
+                        </p>
+                    </div>
+                </div>
+                <!-- DOCUMENT GUIDE CARDS -->
+                <div class="guide-grid" id="documentGuideGrid"></div>
+                <!-- NO RESULTS -->
+                <div class="guide-empty" id="guideEmptyState" hidden>
+                    <div class="placeholder-icon">▤</div>
+                    <h3>No Documents Found</h3>
+                    <p>Try searching using another document name or purpose.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<!-- SUPABASE LIBRARY -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- SUPABASE CONFIGURATION -->
+<script src="supabase-config.js"></script>
+
+<!-- MAIN BARANGAYHUB SCRIPT -->
+<script src="script.js"></script>
+
+<!-- Supabase Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Supabase Configuration -->
+<script src="supabase-config.js"></script>
+
+<!-- Main BarangayHub Script -->
+<script src="script.js"></script>
+
+</body>
+</html>
+
